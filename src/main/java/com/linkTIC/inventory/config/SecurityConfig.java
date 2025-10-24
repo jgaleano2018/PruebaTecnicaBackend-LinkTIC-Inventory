@@ -18,25 +18,12 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable()) // disable CSRF for APIs
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll()
-            );
-
-        return http.build();
-    }*/
-    
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
+            		//.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
                     .anyRequest().permitAll()
             )
             .httpBasic(Customizer.withDefaults())

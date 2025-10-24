@@ -58,13 +58,13 @@ public class InventoryService implements InventoryUseCases {
 	    	
 	    	saved = this.repository.save(existing);
 	    	
-	    	log.info("Updated inventory id={}", id);
+	    	////log.info("Updated inventory id={}", id);
 	    	
 	    	return saved;
     	  
 	    } catch (Exception e) {
 	    	
-	    	log.warn("Attempt to update inventory id={}", inventory.getId());
+	    	////log.warn("Attempt to update inventory id={}", inventory.getId());
 	        throw new EntityNotFoundException("Error: "+e.getMessage());
 	    }
     	
@@ -90,7 +90,7 @@ public class InventoryService implements InventoryUseCases {
     		
     	} catch (Exception e) {
 	    	
-	    	log.warn("Attempt to delete inventory id={}", id);
+	    	////log.warn("Attempt to delete inventory id={}", id);
 	        throw new EntityNotFoundException("Error: "+e.getMessage());
 	    }
     }
