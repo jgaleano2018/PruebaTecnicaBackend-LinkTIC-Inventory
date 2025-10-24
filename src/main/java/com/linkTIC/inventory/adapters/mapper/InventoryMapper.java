@@ -1,11 +1,13 @@
 package com.linkTIC.inventory.adapters.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.linkTIC.inventory.adapters.dto.InventoryDTO;
 import com.linkTIC.inventory.domain.model.Inventory;
 import com.linkTIC.inventory.domain.model.payload.InventoryResponse;
+import com.linkTIC.inventory.outbound.persistence.jpa.InventoryEntity;
 
 public class InventoryMapper {
 
@@ -33,6 +35,15 @@ public class InventoryMapper {
     	i.setId(dto.getId());
     	i.setProducto_id(dto.getProducto_id());
     	i.setCantidad(dto.getCantidad());
+    	return i;
+    }
+    
+    public static Inventory toDomainFromOptional(Optional<InventoryEntity> optInventory) {
+    	if (optInventory == null) return null;
+    	Inventory i = new Inventory();
+    	i.setId(optInventory.get().getId());
+    	i.setProducto_id(optInventory.get().getProducto_id());
+    	i.setCantidad(optInventory.get().getCantidad());
     	return i;
     }
 

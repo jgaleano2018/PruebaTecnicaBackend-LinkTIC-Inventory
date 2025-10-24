@@ -15,10 +15,10 @@ import com.linkTIC.inventory.outbound.persistence.jpa.InventoryEntity;
 @Component
 public class InventoryRepositoryAdapter implements InventoryRepositoryPort {
 
-    private final InventoryRepository InventoryRepo;
+    private final InventoryRepository inventoryRepo;
 
     public InventoryRepositoryAdapter(InventoryRepository InventoryRepo){
-        this.InventoryRepo = InventoryRepo;
+        this.inventoryRepo = InventoryRepo;
     }
 
     private Inventory toDomain(InventoryEntity e) { 
@@ -37,20 +37,25 @@ public class InventoryRepositoryAdapter implements InventoryRepositoryPort {
     public Inventory save(Inventory inventory){
     	InventoryEntity entity = toEntity(inventory);
         if (entity.getId() == null) entity.setId(inventory.getId());
-        InventoryEntity saved = InventoryRepo.save(entity);
+        InventoryEntity saved = inventoryRepo.save(entity);
         return toDomain(saved);
     }
 
     @Override
 	public Optional<Inventory> findById(Long id) {
-		return InventoryRepo.findById(id).map(this::toDomain);
+    	return inventoryRepo.findById(id).map(this::toDomain);
 	}
 	
 	
 	@Override
 	public List<Inventory> findAll() {
-		return InventoryRepo.findAll().stream().map(this::toDomain).collect(Collectors.toList());
+		return inventoryRepo.findAll().stream().map(this::toDomain).collect(Collectors.toList());
 	}
 	
-    @Override public void delete(Long id){ InventoryRepo.deleteById(id); }
+    @Override public void delete(Long id){ inventoryRepo.deleteById(id); }
+    
+    @Override
+   	public Optional<InventoryEntity> findByProducto_id(Long producto_id) {
+   		return inventoryRepo.findByProducto_id(producto_id);
+   	}
 }

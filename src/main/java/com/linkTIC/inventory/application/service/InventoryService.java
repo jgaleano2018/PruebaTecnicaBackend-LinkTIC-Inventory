@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.linkTIC.inventory.adapters.mapper.InventoryMapper;
 import com.linkTIC.inventory.domain.model.Inventory;
 import com.linkTIC.inventory.domain.port.in.InventoryUseCases;
 import com.linkTIC.inventory.domain.port.out.InventoryRepositoryPort;
@@ -28,9 +29,7 @@ public class InventoryService implements InventoryUseCases {
     	Inventory saved;
     	
     	try {
-    		
-    		this.repository.save(inventory);
-    		
+    		    		
     		saved = this.repository.save(inventory);
     		
     		log.info("Created inventory id={} product_id={}", saved.getId(), saved.getProducto_id());
@@ -40,7 +39,6 @@ public class InventoryService implements InventoryUseCases {
 		
 	    } catch (Exception e) {
 	    	
-	        //throw new IllegalArgumentException("Error: "+e.getMessage());
 	    	log.warn("Attempt to create inventory id={}", inventory.getId());
 	        throw new EntityNotFoundException("Error: "+e.getMessage());
 	    }
@@ -56,15 +54,17 @@ public class InventoryService implements InventoryUseCases {
     	try {
 	    	existing = repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
 	    	
+	    	existing.setCantidad(inventory.getCantidad());
+	    	
 	    	saved = this.repository.save(existing);
 	    	
-	    	////log.info("Updated inventory id={}", id);
+	    	log.info("Updated inventory id={}", id);
 	    	
 	    	return saved;
     	  
 	    } catch (Exception e) {
 	    	
-	    	////log.warn("Attempt to update inventory id={}", inventory.getId());
+	    	log.warn("Attempt to update inventory id={}", inventory.getId());
 	        throw new EntityNotFoundException("Error: "+e.getMessage());
 	    }
     	
@@ -88,10 +88,18 @@ public class InventoryService implements InventoryUseCases {
     		
     		repository.delete(id);
     		
+    		log.info("Deleted inventory id={}", id);
+    		
     	} catch (Exception e) {
 	    	
-	    	////log.warn("Attempt to delete inventory id={}", id);
+	    	log.warn("Attempt to delete inventory id={}", id);
 	        throw new EntityNotFoundException("Error: "+e.getMessage());
 	    }
+    }
+    
+    
+    @Override
+    public Inventory findByProducto_id(Long producto_id){
+        return InventoryMapper.toDomainFromOptional(repository.findByProducto_id(producto_id));
     }
 }

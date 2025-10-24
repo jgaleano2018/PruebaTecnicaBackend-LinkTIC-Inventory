@@ -20,11 +20,29 @@ public class ApiKeyFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
+    	
+    	String path = request.getRequestURI();
+
+        // ❌ Problem: applies to all paths including Swagger
+        // ✅ Fix: skip Swagger-related paths
+        if (isSwaggerPath(path)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        
         String apiKey = request.getHeader(HEADER_NAME);
         if (VALID_KEY.equals(apiKey)) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
+    }
+    
+    private boolean isSwaggerPath(String path) {
+        return path.startsWith("/swagger-ui")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-resources")
+                || path.startsWith("/webjars")
+                || path.equals("/swagger-ui.html");
     }
 }

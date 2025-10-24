@@ -19,11 +19,19 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
     
+	private static final String[] SWAGGER_WHITELIST = {
+			 "/swagger-ui/**",
+             "/swagger-ui.html",
+             "/v3/api-docs/**",
+             "/swagger-resources/**",
+             "/webjars/**"
+	    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-            		//.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").hasRole("ADMIN")
+            		.requestMatchers(SWAGGER_WHITELIST).permitAll()
                     .anyRequest().permitAll()
             )
             .httpBasic(Customizer.withDefaults())

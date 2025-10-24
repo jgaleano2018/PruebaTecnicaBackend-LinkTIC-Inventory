@@ -1,7 +1,6 @@
 package com.linkTIC.inventory.domain.port.in;
 
 import java.util.List;
-
 import com.linkTIC.inventory.domain.model.Inventory;
 
 public interface InventoryUseCases {
@@ -10,4 +9,5 @@ public interface InventoryUseCases {
 	Inventory getById(Long id);
     List<Inventory> getAll();
     void delete(Long id);
+    Inventory findByProducto_id(Long producto_id);
 }
