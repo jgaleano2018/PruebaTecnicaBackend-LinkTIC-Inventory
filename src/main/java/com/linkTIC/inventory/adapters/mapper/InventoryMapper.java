@@ -46,6 +46,15 @@ public class InventoryMapper {
     	i.setCantidad(optInventory.get().getCantidad());
     	return i;
     }
+    
+    public static Inventory toDomainFromOptionalAux(Optional<Inventory> optInventory) {
+    	if (optInventory == null) return null;
+    	Inventory i = new Inventory();
+    	i.setId(optInventory.get().getId());
+    	i.setProducto_id(optInventory.get().getProducto_id());
+    	i.setCantidad(optInventory.get().getCantidad());
+    	return i;
+    }
 
 
     public static List<InventoryDTO> toDtoList(List<Inventory> list) {

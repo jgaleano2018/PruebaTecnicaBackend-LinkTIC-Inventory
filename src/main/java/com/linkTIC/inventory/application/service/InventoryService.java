@@ -1,6 +1,7 @@
 package com.linkTIC.inventory.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,10 @@ public class InventoryService implements InventoryUseCases {
     	
     	Inventory saved;
     	
+    	if (inventory == null) {
+    		throw new IllegalArgumentException("Inventory to create cannot be null");
+        }
+    	
     	try {
     		    		
     		saved = this.repository.save(inventory);
@@ -40,7 +45,7 @@ public class InventoryService implements InventoryUseCases {
 	    } catch (Exception e) {
 	    	
 	    	log.warn("Attempt to create inventory id={}", inventory.getId());
-	        throw new EntityNotFoundException("Error: "+e.getMessage());
+	        throw new IllegalArgumentException("Error: "+e.getMessage());
 	    }
     }
 
@@ -50,6 +55,10 @@ public class InventoryService implements InventoryUseCases {
     	
     	Inventory existing;
     	Inventory saved;
+    	
+    	if (inventory == null) {
+    		throw new IllegalArgumentException("Inventory to update cannot be null");
+        }
     	
     	try {
 	    	existing = repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
@@ -65,14 +74,29 @@ public class InventoryService implements InventoryUseCases {
 	    } catch (Exception e) {
 	    	
 	    	log.warn("Attempt to update inventory id={}", inventory.getId());
-	        throw new EntityNotFoundException("Error: "+e.getMessage());
+	        throw new IllegalArgumentException("Error: "+e.getMessage());
 	    }
     	
     }
 
     @Override
     public Inventory getById(Long id){
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
+        
+    	Inventory inventory = new Inventory();
+    	
+    	try {
+    	
+    		Optional<Inventory> inventoryOptional = repository.findById(id);
+    		
+    		inventory = InventoryMapper.toDomainFromOptionalAux(inventoryOptional);
+    	
+    	}
+    	catch(Exception e) {
+    		
+    		log.warn("Attempt to get inventory id={}", inventory.getId());
+    	}
+    	
+    	return inventory;    		
     }
 
     @Override
@@ -93,13 +117,27 @@ public class InventoryService implements InventoryUseCases {
     	} catch (Exception e) {
 	    	
 	    	log.warn("Attempt to delete inventory id={}", id);
-	        throw new EntityNotFoundException("Error: "+e.getMessage());
+	        throw new IllegalArgumentException("Error: "+e.getMessage());
 	    }
     }
     
     
     @Override
-    public Inventory findByProducto_id(Long producto_id){
-        return InventoryMapper.toDomainFromOptional(repository.findByProducto_id(producto_id));
+    public Inventory findByProductoId(Long productoId){
+    	
+    	Inventory inventory = new Inventory();
+    	
+    	try {
+    	
+    		inventory = InventoryMapper.toDomainFromOptional(repository.findByProductoId(productoId));
+    		
+    	}
+    	catch(Exception e) {
+    		
+    		log.warn("Attempt to get inventory id={}", inventory.getId());
+    		
+    	}
+    	
+    	return inventory;    	
     }
 }

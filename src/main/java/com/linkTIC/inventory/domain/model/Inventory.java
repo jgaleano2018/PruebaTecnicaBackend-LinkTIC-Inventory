@@ -3,7 +3,7 @@ package com.linkTIC.inventory.domain.model;
 public class Inventory {
 	
 	private Long id; // matches id_inventory INT
-	private Long producto_id;
+	private Long productoId;
 	private int cantidad;
 	
 	// constructors, getters, setters
@@ -30,12 +30,12 @@ public class Inventory {
 
 
 	public Long getProducto_id() {
-		return producto_id;
+		return productoId;
 	}
 
 
 	public void setProducto_id(Long producto_id) {
-		this.producto_id = producto_id;
+		this.productoId = producto_id;
 	}
 
 

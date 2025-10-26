@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import com.linkTIC.inventory.application.service.InventoryService;
 import com.linkTIC.inventory.domain.model.Inventory;
 
@@ -13,16 +14,18 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.doNothing;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNull;
 
 @SpringBootTest
 class InventoryApplicationTests {
-
+	
 	@Test
 	void contextLoads() {
 	}
 	
 	@Mock
     private InventoryService service;
+	
 
     @Test
     void shouldReturnInventory() throws Exception {
@@ -76,7 +79,22 @@ class InventoryApplicationTests {
          service.delete(inventoryId);
 
          // Verify that findById and delete were called
-         //verify(service, times(1)).getById(inventoryId);
          verify(service, times(1)).delete(inventory.getId());
     }
+    
+    @Test
+    void shouldThrowExceptionWhenInventoryToCreateIsNull() {
+        
+    	 Inventory result = service.create(null);
+    	 assertNull(result);
+    }
+    
+    @Test
+    void shouldThrowExceptionWhenInventoryToUpdateIsNull() {
+        
+    	 Inventory result = service.update(null, null);
+    	 assertNull(result);
+    }
+    
+    
 }

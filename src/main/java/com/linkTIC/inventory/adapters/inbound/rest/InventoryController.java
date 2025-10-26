@@ -67,8 +67,8 @@ public class InventoryController {
     
     @GetMapping("/product/{id}")
     @Operation(summary = "Get inventory by ID", description = "Returns a single inventory")
-    public ResponseEntity<InventoryDTO> getProduct_id(@PathVariable Long id){   	
-        return ResponseEntity.ok(InventoryMapper.toDto(inventoryService.findByProducto_id(id)));
+    public ResponseEntity<InventoryDTO> getProductId(@PathVariable Long id){   	
+        return ResponseEntity.ok(InventoryMapper.toDto(inventoryService.findByProductoId(id)));
     }
     
     // simple health endpoint

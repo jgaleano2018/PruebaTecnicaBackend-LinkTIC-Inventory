@@ -7,6 +7,6 @@ import com.linkTIC.inventory.outbound.persistence.jpa.InventoryEntity;
 
 public interface InventoryRepository extends JpaRepository<InventoryEntity, Long> { 
 	
-	Optional<InventoryEntity> findByProducto_id(Long producto_id);
+	Optional<InventoryEntity> findByProductoId(Long productoId);
 	
 }

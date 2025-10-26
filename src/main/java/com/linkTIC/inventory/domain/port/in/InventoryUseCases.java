@@ -9,5 +9,5 @@ public interface InventoryUseCases {
 	Inventory getById(Long id);
     List<Inventory> getAll();
     void delete(Long id);
-    Inventory findByProducto_id(Long producto_id);
+    Inventory findByProductoId(Long productoId);
 }

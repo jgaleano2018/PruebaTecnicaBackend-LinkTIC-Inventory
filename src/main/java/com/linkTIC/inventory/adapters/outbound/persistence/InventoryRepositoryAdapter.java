@@ -55,7 +55,7 @@ public class InventoryRepositoryAdapter implements InventoryRepositoryPort {
     @Override public void delete(Long id){ inventoryRepo.deleteById(id); }
     
     @Override
-   	public Optional<InventoryEntity> findByProducto_id(Long producto_id) {
-   		return inventoryRepo.findByProducto_id(producto_id);
+   	public Optional<InventoryEntity> findByProductoId(Long productoId) {
+   		return inventoryRepo.findByProductoId(productoId);
    	}
 }

@@ -10,8 +10,8 @@ public class InventoryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
 	
-	@Column(nullable=false)
-	private Long producto_id;
+	@Column(name = "producto_id", nullable=false)
+	private Long productoId;
 	
 	@Column(nullable=false)
 	private int cantidad;
@@ -24,10 +24,10 @@ public class InventoryEntity {
 		this.id = id;
 	}
 	public Long getProducto_id() {
-		return producto_id;
+		return productoId;
 	}
 	public void setProducto_id(Long producto_id) {
-		this.producto_id = producto_id;
+		this.productoId = producto_id;
 	}
 	public int getCantidad() {
 		return cantidad;

@@ -12,5 +12,5 @@ public interface InventoryRepositoryPort {
     Optional<Inventory> findById(Long id);
     List<Inventory> findAll();
     void delete(Long id);
-    Optional<InventoryEntity> findByProducto_id(Long producto_id);
+    Optional<InventoryEntity> findByProductoId(Long productoId);
 }
