@@ -1,6 +1,5 @@
 # PruebaTecnicaBackend-LinkTIC-Inventory
 
-# proyectoDOMINA
 # Instrucciones de Instalación y Ejecucción
   ##Lenguaje de programación
     - Spring Boot Java
