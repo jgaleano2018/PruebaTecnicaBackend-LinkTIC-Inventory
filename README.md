@@ -98,8 +98,8 @@
        <img width="2560" height="1041" alt="image" src="https://github.com/user-attachments/assets/c5b8899b-07bd-4720-b27a-5531a86dd540" />
    - Se implemento el patrón de diseño Abstract Factory:
        <img width="2557" height="1035" alt="image" src="https://github.com/user-attachments/assets/cef7ad0a-38b4-4c2b-835f-dd904feb51c5" />
-   - Se implmento el patrón de diseño Repository:
-       <img width="3926" height="1080" alt="image" src="https://github.com/user-attachments/assets/7ae8e782-b3a5-415e-a9c8-42e132f4d6a7" />
+   - Se implemento el patrón de diseño Repository:
+       <img width="2557" height="1039" alt="image" src="https://github.com/user-attachments/assets/e0d16335-0a9a-4074-a66f-07c870af10e2" />
 
 # Diagramas de la apliación:
   ##Diagrama de Componentes:
